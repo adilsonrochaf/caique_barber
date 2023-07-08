@@ -3,7 +3,7 @@
  01. Custon font style
  02. Basics and Typography style
  03. Helper style
- 04. Selection style 
+ 04. Selection style
  05. Preloader style
  06. Owl-Theme custom style
  07. Section style
@@ -23,7 +23,7 @@
  21. Services-1 style
  22. Clients style
  23. Gallery style
- 24. Testimonials style 
+ 24. Testimonials style
  25. Opening Hours style
  26. Promo Video style
  27. Booking Form style
@@ -45,7 +45,7 @@
  43. toTop Button style
  44. Overlay Effect Bg image style
  45. Responsive (Media Query)
- 
+
 ------------------------------------------------------- */
 
 
@@ -1137,7 +1137,7 @@ blockquote cite:before {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
-    }    
+    }
 }
 @media screen and (max-width: 991px) {
     .navbar {
@@ -1202,7 +1202,7 @@ blockquote cite:before {
     }
     .nav-scroll .navbar-collapse .active {
         color: #91765a !important;
-    }   
+    }
     .navbar .dropdown-menu .dropdown-item {
         padding: 0 15px;
         font-size: 15px;
@@ -1232,11 +1232,11 @@ blockquote cite:before {
         margin: 0;
         padding: 0 0 0 20px;
     }
-    
+
     .navbar .dropdown-menu li a {
         padding: 0 15px;
     }
-    
+
     .navbar .navbar-nav .nav-link {
         padding-right: 0px;
         padding-left: 0px;
