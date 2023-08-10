@@ -4341,9 +4341,9 @@ button.mfp-arrow {
 
 .booking-box {
     position: relative;
-    background: #f5eee7;
+    background: #F5EEE7;
     padding: 45px 30px 60px 30px;
-    margin-bottom: -75px;
+    margin-bottom: 20px
 }
 
 .booking-box .head-box h6 {
@@ -5914,10 +5914,11 @@ p.footer-contact-phone {
 select {
     width: 160px;
     max-width: 100%;
-    height: 70px;
+    height: 52.5px;
     padding: 0 30px;
     border: 1px solid #625c56;
-    color: #aba59f;
+    font-size: 15px;
+    color: #14100c;
     -webkit-appearance: none;
     -moz-appearance: none;
 }

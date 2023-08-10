@@ -5,7 +5,7 @@
 01. ScrollIt
 02. Navbar scrolling background
 03. Close navbar-collapse when a  clicked
-04. Sections background image from data background 
+04. Sections background image from data background
 05. Animations
 06. YouTubePopUp
 07. Slider & Slider Fade OwlCarousel
@@ -40,43 +40,43 @@ $(function () {
         onPageChange: null, // function(pageIndex) that is called when page is changed
         topOffset: -70 // offste (in px) for fixed top navigation
     });
-    
-    // Navbar scrolling background 
+
+    // Navbar scrolling background
     wind.on("scroll", function () {
         var bodyScroll = wind.scrollTop(),
             navbar = $(".navbar"),
             logo = $(".navbar .logo> img");
         if (bodyScroll > 100) {
             navbar.addClass("nav-scroll");
-            logo.attr('src', 'img/logo.png');
+            logo.attr('src', './../assets/logo.jpg');
         } else {
             navbar.removeClass("nav-scroll");
-            logo.attr('src', 'img/logo.png');
+            logo.attr('src', './../assets/logo.jpg');
         }
     });
 
-    
-    // Close navbar-collapse when a  clicked 
+
+    // Close navbar-collapse when a  clicked
     $(".navbar-nav .dropdown-item a").on('click', function () {
         $(".navbar-collapse").removeClass("show");
     });
-    
+
      // Close mobile menu "on click"
-    $(function(){ 
+    $(function(){
          var navMain = $(".navbar-collapse");
          navMain.on("click", "a", null, function () {
              navMain.collapse('hide');
          });
      });
-    
-    // Sections background image from data background 
+
+    // Sections background image from data background
     var pageSection = $(".bg-img, section");
     pageSection.each(function (indx) {
         if ($(this).attr("data-background")) {
             $(this).css("background-image", "url(" + $(this).data("background") + ")");
         }
     });
-    
+
     // Animations *
     var contentWayPoint = function () {
         var i = 0;
@@ -110,11 +110,11 @@ $(function () {
     $(function () {
         contentWayPoint();
     });
-    
-    // YouTubePopUp 
+
+    // YouTubePopUp
     $("a.vid").YouTubePopUp();
-    
-    // Slider & Slider Fade OwlCarousel 
+
+    // Slider & Slider Fade OwlCarousel
     var owl = $('.header .owl-carousel');
     // Slider owlCarousel - (Inner Page Slider)
     $('.slider .owl-carousel').owlCarousel({
@@ -180,8 +180,8 @@ $(function () {
         $('.owl-item').not('.cloned').eq(item).find('.button-1').addClass('animated fadeInUp');
         $('.owl-item').not('.cloned').eq(item).find('.button-2').addClass('animated fadeInUp');
     });
-    
-    // Testimonials owlCarousel 
+
+    // Testimonials owlCarousel
     $('.testimonials .owl-carousel').owlCarousel({
         loop: true,
         margin: 30,
@@ -204,8 +204,8 @@ $(function () {
             }
         }
     });
-    
-    // Barber Services owlCarousel 
+
+    // Barber Services owlCarousel
     $('.barber-services .owl-carousel').owlCarousel({
         loop: true,
         margin: 30,
@@ -228,8 +228,8 @@ $(function () {
             }
         }
     });
-    
-    // Barber Services 2 owlCarousel 
+
+    // Barber Services 2 owlCarousel
     $('.barber-services-2 .owl-carousel').owlCarousel({
         loop: true,
         margin: 30,
@@ -252,8 +252,8 @@ $(function () {
             }
         }
     });
-    
-    // Services 1 owlCarousel 
+
+    // Services 1 owlCarousel
     $('.services-1 .owl-carousel').owlCarousel({
         loop: true,
         margin: 30,
@@ -276,8 +276,8 @@ $(function () {
             }
         }
     });
-    
-    // First-Class Services owlCarousel 
+
+    // First-Class Services owlCarousel
     $('.first-class-services .owl-carousel').owlCarousel({
         loop: true,
         margin: 30,
@@ -300,8 +300,8 @@ $(function () {
             }
         }
     });
-    
-    // News owlCarousel 
+
+    // News owlCarousel
     $('.news .owl-carousel').owlCarousel({
         loop: true,
         margin: 30,
@@ -323,10 +323,10 @@ $(function () {
             }
         }
     });
-    
 
-    
-    // Team owlCarousel 
+
+
+    // Team owlCarousel
     $('.team .owl-carousel').owlCarousel({
         loop: true,
         margin: 30,
@@ -348,8 +348,8 @@ $(function () {
             }
         }
     });
-    
-    // Clients owlCarousel 
+
+    // Clients owlCarousel
     $('.clients .owl-carousel').owlCarousel({
         loop: true,
         margin: 30,
@@ -371,7 +371,7 @@ $(function () {
             }
         }
     });
-    
+
     // MagnificPopup Gallery
     $('.gallery').magnificPopup({
         delegate: '.popimg',
@@ -406,7 +406,7 @@ $(function () {
             verticalFit: true
         }
     });
-    
+
     // Smooth Scrolling
     $('a[href*="#"]')
         // Remove links that don't actually link to anything
@@ -437,10 +437,10 @@ $(function () {
                 }
             }
         });
-    
+
     //  Scroll back to top
     var progressPath = document.querySelector('.progress-wrap path');
-    var pathLength = progressPath.getTotalLength();
+    var pathLength = progressPath?.getTotalLength();
     progressPath.style.transition = progressPath.style.WebkitTransition = 'none';
     progressPath.style.strokeDasharray = pathLength + ' ' + pathLength;
     progressPath.style.strokeDashoffset = pathLength;
@@ -470,17 +470,17 @@ $(function () {
         }, duration);
         return false;
     })
-    
+
     // Select2
     $('.select2').select2({
         minimumResultsForSearch: Infinity,
     });
-    
+
     // Datepicker
     $(".datepicker").datepicker({
         orientation: "top"
     });
-    
+
     //  Pricing Tabs
     var wind = $(window);
     $('.tabs .tab-links').on('click', '.item-link', function () {
@@ -497,7 +497,7 @@ $(function () {
         $('.tab-content').fadeOut();
         $("#" + tab2_id).fadeIn();
     });
-    
+
     //  Pricing Accordion
     $(".accordion").on("click", ".title", function () {
         $(this).next().slideDown();
@@ -506,7 +506,7 @@ $(function () {
     $(".accordion").on("click", ".item", function () {
         $(this).addClass("active").siblings().removeClass("active");
     });
-    
+
     // Accordion Box (for Faqs)
     if ($(".accordion-box").length) {
         $(".accordion-box").on("click", ".acc-btn", function () {
@@ -546,12 +546,12 @@ $(function () {
             $('.popup-img').magnificPopup('close');
         });
     }
-     
-    
+
+
     // Preloader
     $("#preloader").fadeOut(800);
     $(".preloader-bg").delay(800).fadeOut(800);
-    
+
     // Contact Form
     var form = $('.contact__form'),
         message = $('.contact__msg'),
@@ -584,5 +584,5 @@ $(function () {
         .done(done_func)
         .fail(fail_func);
     });
-    
+
 });
