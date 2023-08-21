@@ -1,0 +1,562 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <!-- Logo -->
+    <div class="logo-wrapper">
+      <a class="logo" href="index.html">
+        <img src="./../../assets/logo.jpg" class="logo-img" alt="" />
+      </a>
+    </div>
+    <!-- Button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbar"
+      aria-controls="navbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"><i class="ti-menu"></i></span>
+    </button>
+    <!-- Menu -->
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-scroll-nav="2">Agendar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-scroll-nav="3">Quem Somos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-scroll-nav="4">Serviços</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-scroll-nav="5">Preços</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-scroll-nav="6">Equipe</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-scroll-nav="7">Contato</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<section id="agendar" data-scroll-index="2">
+  <div
+    class="background bg-img bg-fixed section-padding pb-0"
+    data-background="./../../assets/img/slider/2.jpg"
+    data-overlay-dark="6"
+  >
+    <div class="container">
+      <div class="row">
+        <!-- Appointment call -->
+
+        <div class="col-md-5 mb-30 mt-60 text-center">
+          <h6>Desde 2015</h6>
+          <h1>Excelência em estilo masculino</h1>
+        </div>
+
+        <!-- Appointment form -->
+        <div class="col-md-5 offset-md-2">
+          <div class="booking-box">
+            <div class="head-box text-center">
+              <h4>Agende um horário</h4>
+            </div>
+            <div class="booking-inner clearfix">
+              <form class="form1 clearfix" [formGroup]="agendamentoForm">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="input1_wrapper">
+                      <label>Nome Completo</label>
+                      <div class="input2_inner">
+                        <input
+                          type="text"
+                          class="form-control input"
+                          placeholder="Nome"
+                          formControlName="nome"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input1_wrapper">
+                      <label>Telefone</label>
+                      <div class="input2_inner">
+                        <input
+                          type="text"
+                          class="form-control input"
+                          placeholder="Telefone"
+                          formControlName="telefone"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="select1_wrapper">
+                      <label>Barbeiro</label>
+                      <div class="select1_inner">
+                        <select class="select2 select" style="width: 100%" formControlName="barbeiro" >
+                          <option value="" disabled selected>Barbeiro</option>
+                          <option *ngFor="let barbeiro of barbeiros" [value]="barbeiro.id">{{ barbeiro.nome }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="select1_wrapper">
+                      <label>Serviço</label>
+                      <div class="select1_inner">
+                        <select class="select2 select" style="width: 100%" formControlName="servico">
+                          <option value="" disabled selected>Serviços</option>
+                          <option *ngFor="let servico of servicos" [value]="servico.id">{{ servico.nome }} - {{servico.valor | currency:'BRL'}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="select1_wrapper">
+                      <label>Data</label>
+                      <div class="select1_inner">
+                        <select class="select2 select" style="width: 100%" formControlName="data">
+                          <option value="" disabled selected>Data</option>
+                          <option *ngFor="let dia of diasLivres" [value]="dia">{{ dia | date: 'dd/MM/yyyy' }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="select1_wrapper">
+                      <label>Horário</label>
+                      <div class="select1_inner">
+                        <select class="select2 select" style="width: 100%" formControlName="horario">
+                          <option value="" disabled selected>Horário</option>
+                          <option *ngFor="let horario of horariosLivres" [value]="horario">{{ horario }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <button type="submit" class="btn-form1-submit mt-15" (click)="onSubmit()">
+                      Agendar
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- About -->
+<section id="about" data-scroll-index="3" class="about section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mb-30">
+        <div class="section-head mb-20">
+          <div class="section-subtitle">Desde 2015</div>
+          <div class="section-title">Caique Barber</div>
+        </div>
+        <p>
+          Um espaço dedicado ao cuidado e estilo masculino, atendendo clientes
+          desde 2015. Com uma paixão inabalável pelo ofício, um ambiente
+          acolhedor e autêntico para os homens que procuram mais do que um
+          simples corte de cabelo ou barba.
+        </p>
+
+        <p>
+          Nossa missão vai além das tesouras e navalhas. Buscamos proporcionar
+          uma experiência completa, onde cada visita à nossa barbearia se torna
+          um momento de transformação e confiança.
+        </p>
+      </div>
+      <div class="col col-md-3 animate-box" data-animate-effect="fadeInUp">
+        <img src="./../../assets/img/about2.jpg" alt="" class="mt-90 mb-30" />
+      </div>
+      <div class="col col-md-3 animate-box" data-animate-effect="fadeInUp">
+        <img src="./../../assets/img/about.jpg" alt="" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section
+  id="services"
+  data-scroll-index="4"
+  class="barber-services section-padding bg-darkbrown"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-head text-center">
+          <div class="section-subtitle">O que oferecemos</div>
+          <div class="section-title white">Principais Serviços</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 animate-box" data-animate-effect="fadeInUp">
+        <a href="services-page.html">
+          <div class="item">
+            <div class="position-re o-hidden">
+              <img src="./../../assets/img/services/2.jpg" alt="" />
+            </div>
+            <div class="con">
+              <div class="icon icon-icon-1-6"></div>
+              <h5>Corte</h5>
+              <div class="line"></div>
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <h6>$30</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 animate-box" data-animate-effect="fadeInUp">
+        <a href="services-page.html">
+          <div class="item">
+            <div class="position-re o-hidden">
+              <img src="./../../assets/img/services/1.jpg" alt="" />
+            </div>
+            <div class="con">
+              <div class="icon icon-icon-1-1"></div>
+              <h5>Barba</h5>
+              <div class="line"></div>
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <h6>$20</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 animate-box" data-animate-effect="fadeInUp">
+        <a href="services-page.html">
+          <div class="item">
+            <div class="position-re o-hidden">
+              <img src="./../../assets/img/services/3.jpg" alt="" />
+            </div>
+            <div class="con">
+              <div class="icon icon-icon-1-4"></div>
+              <h5>Limpeza de Pele</h5>
+              <div class="line"></div>
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <h6>$15</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section
+  id="pricing"
+  data-scroll-index="5"
+  class="barber-pricing section-padding position-re"
+>
+  <div class="container">
+    <div class="row">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-head text-center">
+            <div class="section-title">Serviços e Preços</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="menu-list mb-30">
+          <div class="item">
+            <div class="flex">
+              <div class="title">Corte Simples</div>
+              <div class="dots"></div>
+              <div class="price">R$ 25,00</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-list mb-30">
+          <div class="item">
+            <div class="flex">
+              <div class="title">Corte Degrade</div>
+              <div class="dots"></div>
+              <div class="price">R$ 30,00</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-list mb-30">
+          <div class="item">
+            <div class="flex">
+              <div class="title">Corte Navalhado</div>
+              <div class="dots"></div>
+              <div class="price">R$ 30,00</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-list mb-30">
+          <div class="item">
+            <div class="flex">
+              <div class="title">Corte Sobrancelha</div>
+              <div class="dots"></div>
+              <div class="price">R$ 40,00</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-list mb-30">
+          <div class="item">
+            <div class="flex">
+              <div class="title">Corte + Progressiva</div>
+              <div class="dots"></div>
+              <div class="price">R$ 100,00</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-list mb-30">
+          <div class="item">
+            <div class="flex">
+              <div class="title">Corte + Barba</div>
+              <div class="dots"></div>
+              <div class="price">R$ 55,00</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-list mb-30">
+          <div class="item">
+            <div class="flex">
+              <div class="title">Corte + Barba + Sobrancelha</div>
+              <div class="price">R$ 60,00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="menu-list mb-30">
+          <div class="item">
+            <div class="flex">
+              <div class="title">Barba Simples</div>
+              <div class="dots"></div>
+              <div class="price">R$ 25,00</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-list mb-30">
+          <div class="item">
+            <div class="flex">
+              <div class="title">Limpeza de pele</div>
+              <div class="dots"></div>
+              <div class="price">R$ 50,00</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-list mb-30">
+          <div class="item">
+            <div class="flex">
+              <div class="title">Luzes</div>
+              <div class="dots"></div>
+              <div class="price">R$ 75,00</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-list mb-30">
+          <div class="item">
+            <div class="flex">
+              <div class="title">Corte + Luzes</div>
+              <div class="dots"></div>
+              <div class="price">R$ 100,00</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-list mb-30">
+          <div class="item">
+            <div class="flex">
+              <div class="title">Progressiva</div>
+              <div class="dots"></div>
+              <div class="price">R$ 75,00</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-list mb-30">
+          <div class="item">
+            <div class="flex">
+              <div class="title">Corte + Barba + Sobrancelha + Limpeza de Pele</div>
+              <div class="price">R$ 120,00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="team" data-scroll-index="6" class="team section-padding pb-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-head text-center">
+          <div class="section-subtitle">Conheça</div>
+          <div class="section-title white">Nossos Barbeiros</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="owl-carousel owl-theme">
+          <div class="team-card mb-30">
+            <div class="team-img">
+              <img src="./../../assets/img/team/b1.jpg" alt="" class="w-100" />
+            </div>
+            <div class="team-content">
+              <h3 class="team-title">Caique<span>Barbeiro</span></h3>
+              <p class="team-text">Especialista em cabelos afros.</p>
+              <div class="social">
+                <div class="full-width">
+                  <a href="#"><i class="ti-facebook"></i></a>
+                  <a href="#"><i class="ti-instagram"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="title-box">
+              <h3 class="mb-0">Caique<span>Barbeiro</span></h3>
+            </div>
+          </div>
+          <div class="team-card mb-30">
+            <div class="team-img">
+              <img src="./../../assets/img/team/b2.jpg" alt="" class="w-100" />
+            </div>
+            <div class="team-content">
+              <h3 class="team-title">Rene<span>Barbeiro</span></h3>
+              <p class="team-text">A Definir.</p>
+              <div class="social">
+                <div class="full-width">
+                  <a href="#"><i class="ti-facebook"></i></a>
+                  <a href="#"><i class="ti-instagram"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="title-box">
+              <h3 class="mb-0">Rene<span>Barbeiro</span></h3>
+            </div>
+          </div>
+          <div class="team-card mb-30">
+            <div class="team-img">
+              <img src="./../../assets/img/team/b3.jpg" alt="" class="w-100" />
+            </div>
+            <div class="team-content">
+              <h3 class="team-title">Vitor<span>Barbeiro</span></h3>
+              <p class="team-text">A Definir.</p>
+              <div class="social">
+                <div class="full-width">
+                  <a href="#"><i class="ti-facebook"></i></a>
+                  <a href="#"><i class="ti-instagram"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="title-box">
+              <h3 class="mb-0">Vitor<span>Barbeiro</span></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Footer -->
+<footer class="footer" data-scroll-index="7">
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="footer-column footer-contact">
+            <h3 class="footer-title">Contatos</h3>
+            <p class="footer-contact-text">
+              Rua Silvares, 486, Silvares, Birigui SP, 16201-013 <br />Brasil
+            </p>
+            <div class="footer-contact-info">
+              <p class="footer-contact-phone">(18)99792-4275</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 offset-md-1">
+          <div class="item opening">
+            <h3 class="footer-title">Horario de Trebalho</h3>
+            <ul>
+              <li>
+                <div class="tit">Segunda-Feira</div>
+                <div class="dots"></div>
+                <span>Closed</span>
+              </li>
+              <li>
+                <div class="tit">Terça-Feira</div>
+                <div class="dots"></div>
+                <span>08:00 - 20:00</span>
+              </li>
+              <li>
+                <div class="tit">Quarta-Feira</div>
+                <div class="dots"></div>
+                <span>08:00 - 20:00</span>
+              </li>
+              <li>
+                <div class="tit">Quinta-Feira</div>
+                <div class="dots"></div>
+                <span>08:00 - 20:00</span>
+              </li>
+              <li>
+                <div class="tit">Sexta-Feira</div>
+                <div class="dots"></div>
+                <span>08:00 - 20:00</span>
+              </li>
+              <li>
+                <div class="tit">Sabado</div>
+                <div class="dots"></div>
+                <span>08:00 - 17:00</span>
+              </li>
+              <li>
+                <div class="tit">Domingo</div>
+                <div class="dots"></div>
+                <span>Closed</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4 offset-md-1">
+          <div class="footer-column footer-explore clearfix">
+            <h3 class="footer-title">Redes Sociais</h3>
+            <div class="footer-about-social-list">
+              <a href="#"><i class="ti-instagram"></i></a>
+              <a href="#"><i class="ti-facebook"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="footer-bottom-inner">
+            <p class="footer-bottom-copy-right">
+              2023 © Todos os direitos reservados. Desenvolvido por Adilson
+              Rocha
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
