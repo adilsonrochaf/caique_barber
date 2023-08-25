@@ -7,11 +7,15 @@ import { AppRoutingModule } from './app.routing';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
+import { AgendamentosComponent } from './agendamentos/agendamentos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SiteComponent
+    SiteComponent,
+    LoginComponent,
+    AgendamentosComponent
   ],
   imports: [
     BrowserModule,

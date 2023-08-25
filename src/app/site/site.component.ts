@@ -16,6 +16,9 @@ export class SiteComponent implements OnInit {
   horariosDisabled = true;
   diasLivres: any = [];
   horariosLivres: any = [];
+  nomeCliente?: string | null;
+  telefoneCliente?: string | null;
+  agendamentosCliente: any = [];
 
   constructor(
     private fb: FormBuilder,
@@ -61,6 +64,28 @@ export class SiteComponent implements OnInit {
         this.agendamentoForm.get('horario')?.enable();
       }
     });
+    this.buscaAgendamentoCliente();
+  }
+
+  buscaAgendamentoCliente(): void {
+    this.nomeCliente = localStorage.getItem('nomeCliente');
+    this.telefoneCliente = localStorage.getItem('telefoneCliente');
+    if (this.telefoneCliente) {
+      this.apiService.getAgendamentosCliente(this.telefoneCliente).subscribe((agendamentos) => {
+        const dataAtual: Date = new Date();
+        const agendamentosFiltrados: string[] = agendamentos.filter((agendamento: any) => this.validaData(agendamento.data_hora) && new Date(agendamento.data_hora) >= dataAtual);
+        this.agendamentosCliente = agendamentosFiltrados;
+        console.log(this.agendamentosCliente);
+      });
+    }
+  }
+
+  novoAgendamento(): void {
+    this.agendamentosCliente = [];
+  }
+
+  validaData(dataStr: string): boolean {
+    return /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(dataStr);
   }
 
   buscarBarbeiros(): void {
@@ -88,14 +113,23 @@ export class SiteComponent implements OnInit {
   }
 
   onSubmit(): void {
+    localStorage.setItem('nomeCliente', this.agendamentoForm.get('nome')?.value);
+    localStorage.setItem('telefoneCliente', this.agendamentoForm.get('telefone')?.value);
     const bodyAgendamento: any = {
-      servico_id: this.agendamentoForm.get('servico')?.value,
-      barbeiro_id: this.agendamentoForm.get('barbeiro')?.value,
+      servico_id: Number(this.agendamentoForm.get('servico')?.value),
+      barbeiro_id: Number(this.agendamentoForm.get('barbeiro')?.value),
       data_hora: `${this.agendamentoForm.get('data')?.value} ${this.agendamentoForm.get('horario')?.value}`,
       nome_cliente: this.agendamentoForm.get('nome')?.value,
       telefone_cliente: this.agendamentoForm.get('telefone')?.value,
     }
-    console.log(bodyAgendamento);
+    this.apiService.postAgendamento(bodyAgendamento).subscribe(() => {
+      this.agendamentoForm.reset();
+      this.agendamentoForm.get('barbeiro')?.setValue('');
+      this.agendamentoForm.get('servico')?.setValue('');
+      this.agendamentoForm.get('data')?.setValue('');
+      this.agendamentoForm.get('horario')?.setValue('');
+      this.buscaAgendamentoCliente();
+    });
   }
 
 }
