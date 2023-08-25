@@ -5,12 +5,19 @@ import { Routes, RouterModule } from '@angular/router';
 import { SiteComponent } from './site/site.component';
 import { LoginComponent } from './login/login.component';
 import { AgendamentosComponent } from './agendamentos/agendamentos.component';
+import { LayoutComponent } from './layout/layout.component';
 
 
 export const routes: Routes =[
   { path: '', component: SiteComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'agendamentos', component: AgendamentosComponent }
+  {
+    path: 'sistema',
+    component: LayoutComponent,
+    children: [
+      { path: 'agendamentos', component: AgendamentosComponent }
+    ]
+  },
 ];
 
 @NgModule({

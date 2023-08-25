@@ -1,0 +1,19 @@
+.nav {
+  text-align: center;
+  padding: 10px;
+  z-index: 1;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #f9f9f9;
+  flex-grow: 1;
+  z-index: 0;
+}
+
+.footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #f2f2f2;
+}

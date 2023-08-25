@@ -9,13 +9,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { AgendamentosComponent } from './agendamentos/agendamentos.component';
+import { LayoutComponent } from './layout/layout.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SiteComponent,
     LoginComponent,
-    AgendamentosComponent
+    AgendamentosComponent,
+    LayoutComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
