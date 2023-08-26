@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       if (res.access_token) {
         localStorage.setItem('accessToken', res.access_token);
         this.loginInvalido = false;
-        this.router.navigate(['/agendamentos']);
+        this.router.navigate(['/sistema/agendamentos']);
       } else {
         this.loginInvalido = true;
       }
