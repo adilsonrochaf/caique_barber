@@ -22,16 +22,16 @@
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link">Agendamentos</a>
+          <a class="nav-link" routerLink="agendamentos">Agendamentos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">Barbeiros</a>
+          <a class="nav-link" routerLink="barbeiros">Barbeiros</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">Serviços</a>
+          <a class="nav-link" routerLink="servicos">Serviços</a>
         </li>
         <li class="nav-item area-barbeiro">
-          <a class="nav-link">Sair</a>
+          <a class="nav-link" (click)="logout()">Sair</a>
         </li>
       </ul>
     </div>
