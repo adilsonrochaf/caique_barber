@@ -6,6 +6,8 @@ import { SiteComponent } from './site/site.component';
 import { LoginComponent } from './login/login.component';
 import { AgendamentosComponent } from './agendamentos/agendamentos.component';
 import { LayoutComponent } from './layout/layout.component';
+import { BarbeirosComponent } from './barbeiros/barbeiros.component';
+import { ServicosComponent } from './servicos/servicos.component';
 
 
 export const routes: Routes =[
@@ -15,7 +17,9 @@ export const routes: Routes =[
     path: 'sistema',
     component: LayoutComponent,
     children: [
-      { path: 'agendamentos', component: AgendamentosComponent }
+      { path: 'agendamentos', component: AgendamentosComponent },
+      { path: 'barbeiros', component: BarbeirosComponent },
+      { path: 'servicos', component: ServicosComponent }
     ]
   },
 ];
