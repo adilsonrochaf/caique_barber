@@ -1,1 +1,67 @@
-<p>servicos works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+        <h3>Serviços</h3>
+    </div>
+    <div class="col-12">
+        <form class="form1 clearfix" [formGroup]="servicosForm">
+          <div class="row">
+            <div class="col-3">
+              <input class="form-control input" type="text" placeholder="Nome" formControlName="nome"/>
+            </div>
+            <div class="col-3">
+              <div class="select1_wrapper">
+                <div class="select1_inner">
+                  <select class="select2 select" style="width: 100%" formControlName="tempo" >
+                    <option value="" disabled selected>Tempo</option>
+                    <option value="00:30:00" disabled selected>00:30:00</option>
+                    <option value="01:00:00" disabled selected>01:00:00</option>
+                    <option value="01:30:00" disabled selected>01:30:00</option>
+                    <option value="02:00:00" disabled selected>02:00:00</option>
+                    <option value="02:30:00" disabled selected>02:30:00</option>
+                    <option value="03:00:00" disabled selected>03:00:00</option>
+                    <option value="03:30:00" disabled selected>03:30:00</option>
+                    <option value="04:00:00" disabled selected>04:00:00</option>
+                    <option value="04:30:00" disabled selected>04:30:00</option>
+                    <option value="05:00:00" disabled selected>05:00:00</option>
+                    <option value="05:30:00" disabled selected>05:30:00</option>
+                    <option value="06:00:00" disabled selected>06:00:00</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-3">
+              <input class="form-control input" type="text" placeholder="Valor" formControlName="valor"/>
+            </div>
+            <div class="col-3">
+              <button class="btn-form1-submit w-100 " type="submit">Adicionar</button>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Tempo</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="servicos.length > 0">
+            <tr *ngFor="let servico of servicos">
+                <td>{{servico.nome}}</td>
+                <td>{{servico.tempo}}</td>
+                <td>{{servico.valor | currency:'BRL'}}</td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="servicos.length === 0">
+          <p>Não possui serviços cadastrados!</p>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

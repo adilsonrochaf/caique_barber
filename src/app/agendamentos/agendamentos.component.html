@@ -1,1 +1,39 @@
-<p>agendamentos works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+        <h3>Agendamentos</h3>
+    </div>
+    <div class="col-9 d-flex align-items-center justify-content-end">
+        <form class="form1 clearfix" [formGroup]="filterForm">
+            <input class="form-control input" type="date" formControlName="dataSugerida"/>
+        </form>
+        <button class="btn-form1-submit w-25 mx-2" type="submit" (click)="buscaAgendamentosBarbeiro()">Buscar</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <table border="1">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Telefone Cliente</th>
+                <th>Serviço / Tempo</th>
+                <th>Data / Hora</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="agendamentos.length > 0">
+            <tr *ngFor="let agendamento of agendamentos">
+                <td>{{agendamento.nome_cliente}}</td>
+                <td>{{agendamento.telefone_cliente}}</td>
+                <td>{{agendamento.servico.nome}} / {{agendamento.servico.tempo}}</td>
+                <td>{{agendamento.data_hora | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="agendamentos.length === 0">
+          <p>Não possui agendamentos para essa data!</p>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -50,4 +50,12 @@ export class ApiService {
     return this.http.post(`${this.apiRoot}agendamentos`, body);
   }
 
+  getAgendamentosBarbeiro(token: string, barbeiro_id: string, data_sugerida: string): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('token', token);
+    params = params.append('barbeiro_id', barbeiro_id);
+    params = params.append('data_sugerida', data_sugerida);
+    return this.http.get(`${this.apiRoot}agendamentos/barbeiro/data`, { params: params });
+  }
+
 }
