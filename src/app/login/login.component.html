@@ -1,13 +1,13 @@
-<section class="vh-100">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+<div class="overlay"></div>
+<section class="vh-100 d-flex align-items-center justify-content-center fundoLogin">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12 col-xl-12 d-flex align-items-center justify-content-center">
         <div class="card bg-dark text-white" style="border-radius: 1rem;">
           <div class="card-body p-5 text-center">
 
             <div class="mb-md-5 mt-md-4 pb-5">
-
-              <h2 class="fw-bold mb-2 text-uppercase">Entrar</h2>
+              <h2 class="fw-bold mb-2 text-uppercase text-white">Entrar</h2>
               <p class="text-white-50 mb-5">Por favor insira seu telefone e senha!</p>
               <form [formGroup]="loginForm">
                 <div class="form-outline form-white mb-4">
@@ -25,16 +25,9 @@
                 </div>
               </form>
 
-
-              <button class="btn btn-outline-light btn-lg px-5" (click)="login()">Entrar</button>
-
               <p class="text-white-50 mb-5" style="padding-top: 10px;" *ngIf="loginInvalido">Dados de login incorretos! Tente novamente.</p>
 
-              <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
-              </div>
+              <button class="btn btn-outline-light btn-lg px-5" (click)="login()">Entrar</button>
 
             </div>
 

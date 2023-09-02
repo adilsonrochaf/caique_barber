@@ -1,0 +1,29 @@
+.fundoLogin {
+  background-image: url('https://classic.exame.com/wp-content/uploads/2020/05/whatsapp-image-2020-05-12-at-10.47.30.jpg?quality=70&strip=info&w=1024');
+  background-size: cover;
+  background-position: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Cor preta com opacidade */
+}
+
+.bg-dark {
+  background: #14100c;
+}
+
+.card {
+  border: none !important;
+  background: #14100c !important;
+}
+
+.fundoLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
