@@ -8,6 +8,7 @@ import { AgendamentosComponent } from './agendamentos/agendamentos.component';
 import { LayoutComponent } from './layout/layout.component';
 import { BarbeirosComponent } from './barbeiros/barbeiros.component';
 import { ServicosComponent } from './servicos/servicos.component';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 
 export const routes: Routes =[
@@ -19,7 +20,8 @@ export const routes: Routes =[
     children: [
       { path: 'agendamentos', component: AgendamentosComponent },
       { path: 'barbeiros', component: BarbeirosComponent },
-      { path: 'servicos', component: ServicosComponent }
+      { path: 'servicos', component: ServicosComponent },
+      { path: 'usuario', component: UsuarioComponent }
     ]
   },
 ];

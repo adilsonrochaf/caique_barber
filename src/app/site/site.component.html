@@ -68,7 +68,7 @@
             <div class="head-box text-center">
               <h4>Horarios Agendados</h4>
             </div>
-            <div class="row" *ngIf="!this.telefoneCliente">
+            <div class="row" *ngIf="agendamentosCliente.length === 0">
               <div class="col-8">
                 <input
                 type="text"
@@ -103,13 +103,13 @@
                 </tbody>
               </table>
               <div class="col-md-12">
-                <button type="submit" [disabled]="true" class="btn-form1-submit mt-15" (click)="novoAgendamento()">
+                <button type="submit" class="btn-form1-submit mt-15" (click)="novoAgendamento()">
                   Novo Agendamento
                 </button>
               </div>
             </div>
           </div>
-          <div class="booking-box" *ngIf="agendamentosCliente.length === 0">
+          <div class="booking-box" *ngIf="agendamentosCliente.length === 0 && !mostrarAgendamentos">
             <div class="head-box text-center">
               <h4>Agende um horário</h4>
             </div>
@@ -201,8 +201,8 @@
                       Agendar
                     </button>
                   </div>
-                  <div class="col-md-12 text-right my-2" style="text-align: end">
-                    Já possui agendamento? <a (click)="mostrarAgendamentos = true">clique aqui</a>
+                  <div class="col-md-12 text-right my-2" style="text-align: end" (click)="mostrarAgendamentos = true">
+                    Já possui agendamento? <a>clique aqui</a>
                   </div>
                 </div>
               </form>
@@ -451,7 +451,7 @@
         <div class="menu-list mb-30">
           <div class="item">
             <div class="flex">
-              <div class="title">Corte + Barba + Sobrancelha + Limpeza de Pele</div>
+              <div class="title">Corte + Barba + Sobran + Limp Pele</div>
               <div class="price">R$ 120,00</div>
             </div>
           </div>
@@ -610,7 +610,7 @@
           <div class="footer-bottom-inner">
             <p class="footer-bottom-copy-right">
               2023 © Todos os direitos reservados. Desenvolvido por Adilson
-              Rocha
+              Rocha e Juliet Araujo
             </p>
           </div>
         </div>

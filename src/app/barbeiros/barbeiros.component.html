@@ -1,1 +1,74 @@
-<p>barbeiros works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+        <h3>Barbeiros</h3>
+    </div>
+    <div class="col-12">
+        <form class="form1 clearfix" [formGroup]="barbeirosForm">
+          <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <input class="form-control input" type="text" placeholder="Nome" formControlName="nome"/>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <input class="form-control input" type="text" placeholder="Telefone" formControlName="telefone" mask="(00)00000-0000"/>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <input class="form-control input" type="text" placeholder="Senha" formControlName="senha"/>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <button class="btn-form1-submit w-100" type="submit" (click)="onSubmit()" [disabled]="!barbeirosForm.valid" [ngClass]="{'disabled-button': !barbeirosForm.valid}">Adicionar</button>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
+
+  <div class="row pt-2">
+    <div class="col-12">
+      <div class="d-none d-md-block">
+        <table>
+          <thead>
+              <tr>
+                  <th>Nome</th>
+                  <th>Telefone</th>
+                  <th class="text-center">Ações</th>
+              </tr>
+          </thead>
+          <tbody *ngIf="barbeiros.length > 0">
+              <tr *ngFor="let barbeiro of barbeiros">
+                  <td>{{barbeiro.nome}}</td>
+                  <td>{{barbeiro.telefone}}</td>
+                  <td class="text-center">
+                    <i class="fa fa-trash p-1" (click)="deletarBarbeiro(barbeiro.guid)"></i>
+                  </td>
+              </tr>
+          </tbody>
+          <tbody *ngIf="barbeiros.length === 0">
+            <p>Não possui barbeiros cadastrados!</p>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="barbeiros.length > 0" class="d-block d-md-none">
+        <div *ngFor="let barbeiro of barbeiros">
+          <div class="card" style="width: auto; background: #b8a38d; margin-bottom: 5px;">
+            <div class="card-body">
+              <h5 class="card-title d-flex justify-content-between align-items-center">
+                {{barbeiro.nome}}
+                <i class="fa fa-trash" (click)="deletarBarbeiro(barbeiro.guid)"></i>
+              </h5>
+              <h6 class="card-subtitle mb-2 text-muted">Telefone: {{barbeiro.telefone}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="barbeiros.length === 0" class="d-block d-md-none">
+        <div class="card pt-1" style="width: auto; background: #b8a38d;">
+          <div class="card-body">
+            <p class="card-text">Não possui barbeiros cadastrados!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner [type]="'ball-spin-clockwise'"></ngx-spinner>

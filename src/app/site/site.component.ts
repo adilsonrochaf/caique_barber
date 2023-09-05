@@ -82,6 +82,7 @@ export class SiteComponent implements OnInit {
 
   novoAgendamento(): void {
     this.agendamentosCliente = [];
+    this.mostrarAgendamentos = false;
   }
 
   validaData(dataStr: string): boolean {

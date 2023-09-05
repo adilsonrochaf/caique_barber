@@ -1,1 +1,68 @@
-<p>agendamentos works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 col-md-7 col-sm-12 col-xs-12 align-items-center">
+        <h3>Agendamentos</h3>
+    </div>
+    <div class="col-lg-9 col-md-5 col-sm-12 col-xs-12 d-flex align-items-center justify-content-end">
+        <form class="form1 clearfix" [formGroup]="filterForm">
+            <input class="form-control input" type="date" formControlName="dataSugerida"/>
+        </form>
+        <button class="btn-form1-submit w-25 mx-2" type="submit" (click)="buscaAgendamentosBarbeiro()">Buscar</button>
+    </div>
+  </div>
+
+  <div class="row pt-3">
+    <div class="col-12">
+      <div class="d-none d-md-block">
+        <table>
+          <thead>
+              <tr>
+                  <th>Cliente</th>
+                  <th>Telefone Cliente</th>
+                  <th>Serviço / Tempo</th>
+                  <th>Data / Hora</th>
+                  <th class="text-center">Ações</th>
+              </tr>
+          </thead>
+          <tbody *ngIf="agendamentos.length > 0">
+              <tr *ngFor="let agendamento of agendamentos">
+                  <td>{{agendamento.nome_cliente}}</td>
+                  <td>{{agendamento.telefone_cliente}}</td>
+                  <td>{{agendamento.servico.nome}} / {{agendamento.servico.tempo}}</td>
+                  <td>{{agendamento.data_hora | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                  <td class="text-center">
+                    <i class="fa fa-trash" (click)="deletarAgendamento(agendamento.guid)"></i>
+                  </td>
+              </tr>
+          </tbody>
+          <tbody *ngIf="agendamentos.length === 0">
+            <p>Não possui agendamentos para essa data!</p>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="agendamentos.length > 0" class="d-block d-md-none">
+        <div *ngFor="let agendamento of agendamentos">
+          <div class="card" style="width: auto; background: #b8a38d; margin-bottom: 5px;">
+            <div class="card-body">
+              <h5 class="card-title d-flex justify-content-between align-items-center">
+                {{agendamento.servico.nome}}
+                <i class="fa fa-trash" (click)="deletarAgendamento(agendamento.guid)"></i>
+              </h5>
+              <h6 class="card-subtitle mb-2 text-muted">Cliente: {{agendamento.nome_cliente}}</h6>
+              <p class="card-text">Data / Hora: {{agendamento.data_hora | date: 'dd/MM/yyyy HH:mm:ss'}}</p>
+              <a class="card-link">Contato Cliente: {{agendamento.telefone_cliente}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="agendamentos.length === 0" class="d-block d-md-none">
+        <div class="card pt-1" style="width: auto; background: #b8a38d;">
+          <div class="card-body">
+            <p class="card-text">Não possui agendamentos para essa data!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner [type]="'ball-spin-clockwise'"></ngx-spinner>

@@ -1,12 +1,16 @@
 .nav {
   text-align: center;
   padding: 45px;
+  top: 0;
+  position: fixed;
+  z-index: 1;
 }
 
 .content {
   flex: 1;
   flex-grow: 1;
-  z-index: 0;
+  padding-top: 30px;
+  margin-top: 90px;
 }
 
 .footer {

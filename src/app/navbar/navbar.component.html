@@ -2,7 +2,7 @@
   <div class="container">
     <!-- Logo -->
     <div class="logo-wrapper">
-      <a class="logo" href="index.html">
+      <a class="logo" routerLink="barbeiros">
         <img src="./../../assets/logo.jpg" class="logo-img" alt="" />
       </a>
     </div>
@@ -30,7 +30,13 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="servicos">Serviços</a>
         </li>
-        <li class="nav-item area-barbeiro">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="usuario">Meu usuário</a>
+        </li>
+        <li class="nav-item sair d-none d-md-block">
+          <a class="nav-link" (click)="logout()">Sair</a>
+        </li>
+        <li class="nav-item d-block d-md-none">
           <a class="nav-link" (click)="logout()">Sair</a>
         </li>
       </ul>
