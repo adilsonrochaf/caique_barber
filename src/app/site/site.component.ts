@@ -19,6 +19,10 @@ export class SiteComponent implements OnInit {
   nomeCliente?: string | null;
   telefoneCliente?: string | null;
   agendamentosCliente: any = [];
+  loadingDates: boolean = false;
+  loadingHours: boolean = false;
+  telefoneValue: string = '';
+  mostrarAgendamentos: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -44,7 +48,6 @@ export class SiteComponent implements OnInit {
       if (barbeiro_id && servico_id) {
         const servico = this.servicos.find((r: any) => r.id = servico_id);
         this.buscarDiasLivres(servico.tempo, Number(barbeiro_id));
-        this.agendamentoForm.get('data')?.enable();
       }
     });
     this.agendamentoForm.get('servico')?.valueChanges.subscribe(servico_id => {
@@ -52,7 +55,6 @@ export class SiteComponent implements OnInit {
       if (servico_id && barbeiro_id) {
         const servico = this.servicos.find((r: any) => r.id = servico_id);
         this.buscarDiasLivres(servico.tempo, Number(barbeiro_id));
-        this.agendamentoForm.get('data')?.enable();
       }
     });
     this.agendamentoForm.get('data')?.valueChanges.subscribe(data => {
@@ -61,7 +63,6 @@ export class SiteComponent implements OnInit {
         const servico = this.servicos.find((r: any) => r.id = servico_id);
         const barbeiro_id = this.agendamentoForm.get('barbeiro')?.value;
         this.buscarHorariosLivres(servico.tempo, Number(barbeiro_id), data);
-        this.agendamentoForm.get('horario')?.enable();
       }
     });
     this.buscaAgendamentoCliente();
@@ -69,19 +70,19 @@ export class SiteComponent implements OnInit {
 
   buscaAgendamentoCliente(): void {
     this.nomeCliente = localStorage.getItem('nomeCliente');
-    this.telefoneCliente = localStorage.getItem('telefoneCliente');
+    this.telefoneCliente = localStorage.getItem('telefoneCliente') ? localStorage.getItem('telefoneCliente') : this.telefoneValue;
     if (this.telefoneCliente) {
       this.apiService.getAgendamentosCliente(this.telefoneCliente).subscribe((agendamentos) => {
         const dataAtual: Date = new Date();
         const agendamentosFiltrados: string[] = agendamentos.filter((agendamento: any) => this.validaData(agendamento.data_hora) && new Date(agendamento.data_hora) >= dataAtual);
         this.agendamentosCliente = agendamentosFiltrados;
-        console.log(this.agendamentosCliente);
       });
     }
   }
 
   novoAgendamento(): void {
     this.agendamentosCliente = [];
+    this.mostrarAgendamentos = false;
   }
 
   validaData(dataStr: string): boolean {
@@ -101,14 +102,20 @@ export class SiteComponent implements OnInit {
   }
 
   buscarDiasLivres(tempoServico: string, barbeiro_id: number): void {
+    this.loadingDates = true;
     this.apiService.getDiasLivres(barbeiro_id, tempoServico).subscribe((dias: any) => {
       this.diasLivres = dias;
+      this.loadingDates = false;
+      this.agendamentoForm.get('data')?.enable();
     });
   }
 
   buscarHorariosLivres(tempoServico: string, barbeiro_id: number, dataSugerida: string): void {
+    this.loadingHours = true;
     this.apiService.getHorariosLivres(barbeiro_id, tempoServico, dataSugerida).subscribe((horarios: any) => {
       this.horariosLivres = horarios;
+      this.loadingHours = false;
+      this.agendamentoForm.get('horario')?.enable();
     });
   }
 
@@ -131,5 +138,6 @@ export class SiteComponent implements OnInit {
       this.buscaAgendamentoCliente();
     });
   }
+
 
 }

@@ -1,5 +1,5 @@
 .barber-pricing .menu-list .flex .dots {
-  width: 40%;
+  width: 20%;
   position: relative;
   margin: 0 20px;
 }
@@ -8,3 +8,9 @@
   border: 1px solid #ccc;
   border-radius: 10px;
 }
+
+.disabled-button {
+  pointer-events: none;
+  opacity: 0.5;
+}
+

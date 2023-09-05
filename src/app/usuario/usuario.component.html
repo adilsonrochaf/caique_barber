@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="row pb-3">
+    <div class="col-12">
+        <h3>Meus Dados:</h3>
+    </div>
+    <div class="col-12">
+        <form class="form1 clearfix" [formGroup]="barbeirosForm">
+          <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <input class="form-control input" type="text" placeholder="Nome" formControlName="nome"/>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <input class="form-control input" type="text" placeholder="Telefone" formControlName="telefone" mask="(00)00000-0000"/>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <input class="form-control input" type="password" placeholder="Senha" formControlName="senha" autocomplete="off"/>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <button class="btn-form1-submit w-100" type="submit" (click)="putBarbeiro()" [disabled]="!barbeirosForm.valid" [ngClass]="{'disabled-button': !barbeirosForm.valid}">Atualizar</button>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="row">
+    <div class="col-12">
+        <h3>Configuração períodos</h3>
+    </div>
+    <div class="col-12">
+        <p>Obs: Só pode ser criado 2 períodos por dia da semana!</p>
+        <form class="form1 clearfix" [formGroup]="periodosForm">
+          <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <input class="form-control input" type="text" placeholder="Hora Inicial - Ex: 08:00:00" formControlName="hora_inicio" mask="00:00:00"/>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <input class="form-control input" type="text" placeholder="Hora Final - Ex: 12:00:00" formControlName="hora_fim" mask="00:00:00"/>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <div class="select1_wrapper">
+                <div class="select1_inner">
+                  <select class="select2 select" style="width: 100%" formControlName="dia_semana">
+                    <option value="" disabled selected>Dia da semana</option>
+                    <option *ngFor="let dia of diasSemana" [value]="dia.id_dominio">{{ dia.nm_dominio }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <button class="btn-form1-submit w-100" type="submit" (click)="addPeriodoTrabalho()" [disabled]="!periodosForm.valid" [ngClass]="{'disabled-button': !periodosForm.valid}">Adicionar</button>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
+
+  <div class="row pt-2">
+    <div class="col-12">
+      <div class="d-none d-md-block">
+        <table>
+          <thead>
+              <tr>
+                  <th>Dia da Semana</th>
+                  <th>Horário Inicial</th>
+                  <th>Horário Final</th>
+                  <th class="text-center">Ações</th>
+              </tr>
+          </thead>
+          <tbody *ngIf="periodos.length > 0">
+              <tr *ngFor="let periodo of periodos">
+                  <td>{{periodo.dia_semana.nm_dominio}}</td>
+                  <td>{{periodo.hora_inicio}}</td>
+                  <td>{{periodo.hora_fim}}</td>
+                  <td class="text-center">
+                    <i class="fa fa-trash p-1" (click)="deletarPeriodo(periodo.guid)"></i>
+                  </td>
+              </tr>
+          </tbody>
+          <tbody *ngIf="periodos.length === 0">
+            <p>Não possui períodos cadastrados!</p>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="periodos.length > 0" class="d-block d-md-none">
+        <div *ngFor="let periodo of periodos">
+          <div class="card" style="width: auto; background: #b8a38d; margin-bottom: 5px;">
+            <div class="card-body">
+              <h5 class="card-title d-flex justify-content-between align-items-center">
+                {{periodo.dia_semana.nm_dominio}}
+                <i class="fa fa-trash" (click)="deletarPeriodo(periodo.guid)"></i>
+              </h5>
+              <h6 class="card-subtitle mb-2 text-muted">Inicio: {{periodo.hora_inicio}}</h6>
+              <h6 class="card-subtitle mb-2 text-muted">Fim: {{periodo.hora_fim}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="periodos.length === 0" class="d-block d-md-none">
+        <div class="card pt-1" style="width: auto; background: #b8a38d;">
+          <div class="card-body">
+            <p class="card-text">Não possui períodos cadastrados!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner [type]="'ball-spin-clockwise'"></ngx-spinner>

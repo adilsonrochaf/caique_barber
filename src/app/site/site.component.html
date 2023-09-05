@@ -41,7 +41,7 @@
           <a class="nav-link" href="#" data-scroll-nav="7">Contato</a>
         </li>
         <li class="nav-item area-barbeiro">
-          <a class="nav-link" routerLink="login">Area do Barbeiro</a>
+          <a class="nav-link" routerLink="login">Área do Barbeiro</a>
         </li>
       </ul>
     </div>
@@ -64,9 +64,26 @@
 
         <!-- Appointment form -->
         <div class="col-md-5 offset-md-2">
-          <div class="booking-box" *ngIf="agendamentosCliente.length > 0">
+          <div class="booking-box" *ngIf="agendamentosCliente.length > 0 || mostrarAgendamentos">
             <div class="head-box text-center">
               <h4>Horarios Agendados</h4>
+            </div>
+            <div class="row" *ngIf="agendamentosCliente.length === 0">
+              <div class="col-8">
+                <input
+                type="text"
+                class="form-control input"
+                placeholder="Telefone"
+                required
+                mask="(00) 0 0000-0000"
+                [(ngModel)]="telefoneValue"
+              />
+              </div>
+              <div class="col-4">
+                <button type="button" (click)="buscaAgendamentoCliente()" class="btn-form1-submit">
+                  buscar
+                </button>
+              </div>
             </div>
             <div class="booking-inner clearfix">
               <table border="1">
@@ -92,7 +109,7 @@
               </div>
             </div>
           </div>
-          <div class="booking-box" *ngIf="agendamentosCliente.length === 0">
+          <div class="booking-box" *ngIf="agendamentosCliente.length === 0 && !mostrarAgendamentos">
             <div class="head-box text-center">
               <h4>Agende um horário</h4>
             </div>
@@ -123,6 +140,7 @@
                           placeholder="Telefone"
                           formControlName="telefone"
                           required
+                          mask="(00) 0 0000-0000"
                         />
                       </div>
                     </div>
@@ -131,7 +149,7 @@
                     <div class="select1_wrapper">
                       <label>Barbeiro</label>
                       <div class="select1_inner">
-                        <select class="select2 select" style="width: 100%" formControlName="barbeiro" >
+                        <select class="select2 select" style="width: 100%" formControlName="barbeiro">
                           <option value="" disabled selected>Barbeiro</option>
                           <option *ngFor="let barbeiro of barbeiros" [value]="barbeiro.id">{{ barbeiro.nome }}</option>
                         </select>
@@ -157,6 +175,9 @@
                           <option value="" disabled selected>Data</option>
                           <option *ngFor="let dia of diasLivres" [value]="dia">{{ dia | date: 'dd/MM/yyyy' }}</option>
                         </select>
+                        <div *ngIf="loadingDates" class="loading-indicator">
+                          Carregando...
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -168,14 +189,20 @@
                           <option value="" disabled selected>Horário</option>
                           <option *ngFor="let horario of horariosLivres" [value]="horario">{{ horario }}</option>
                         </select>
+                        <div *ngIf="loadingHours" class="loading-indicator">
+                          Carregando...
+                        </div>
                       </div>
                     </div>
                   </div>
 
                   <div class="col-md-12">
-                    <button type="submit" class="btn-form1-submit mt-15" (click)="onSubmit()">
+                    <button type="submit" [ngClass]="{'disabled-button': !agendamentoForm.valid}" class="btn-form1-submit mt-15" (click)="onSubmit()">
                       Agendar
                     </button>
+                  </div>
+                  <div class="col-md-12 text-right my-2" style="text-align: end" (click)="mostrarAgendamentos = true">
+                    Já possui agendamento? <a>clique aqui</a>
                   </div>
                 </div>
               </form>
@@ -424,7 +451,7 @@
         <div class="menu-list mb-30">
           <div class="item">
             <div class="flex">
-              <div class="title">Corte + Barba + Sobrancelha + Limpeza de Pele</div>
+              <div class="title">Corte + Barba + Sobran + Limp Pele</div>
               <div class="price">R$ 120,00</div>
             </div>
           </div>
@@ -583,7 +610,7 @@
           <div class="footer-bottom-inner">
             <p class="footer-bottom-copy-right">
               2023 © Todos os direitos reservados. Desenvolvido por Adilson
-              Rocha
+              Rocha e Juliet Araujo
             </p>
           </div>
         </div>

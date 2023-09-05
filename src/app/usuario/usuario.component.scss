@@ -1,0 +1,10 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+.disabled-button {
+  pointer-events: none;
+  opacity: 0.5;
+}

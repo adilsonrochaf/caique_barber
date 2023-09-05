@@ -2,7 +2,7 @@
   <div class="container">
     <!-- Logo -->
     <div class="logo-wrapper">
-      <a class="logo" href="index.html">
+      <a class="logo" routerLink="barbeiros">
         <img src="./../../assets/logo.jpg" class="logo-img" alt="" />
       </a>
     </div>
@@ -22,16 +22,22 @@
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link">Agendamentos</a>
+          <a class="nav-link" routerLink="agendamentos">Agendamentos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">Barbeiros</a>
+          <a class="nav-link" routerLink="barbeiros">Barbeiros</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">Serviços</a>
+          <a class="nav-link" routerLink="servicos">Serviços</a>
         </li>
-        <li class="nav-item area-barbeiro">
-          <a class="nav-link">Sair</a>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="usuario">Meu usuário</a>
+        </li>
+        <li class="nav-item sair d-none d-md-block">
+          <a class="nav-link" (click)="logout()">Sair</a>
+        </li>
+        <li class="nav-item d-block d-md-none">
+          <a class="nav-link" (click)="logout()">Sair</a>
         </li>
       </ul>
     </div>
