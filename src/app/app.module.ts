@@ -14,6 +14,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BarbeirosComponent } from './barbeiros/barbeiros.component';
 import { ServicosComponent } from './servicos/servicos.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UsuarioComponent } from './usuario/usuario.component';
+
 
 export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
 
@@ -26,15 +30,18 @@ export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
     LayoutComponent,
     NavbarComponent,
     BarbeirosComponent,
-    ServicosComponent
+    ServicosComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxSpinnerModule,
     NgxMaskModule.forRoot()
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

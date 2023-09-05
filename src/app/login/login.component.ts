@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
     const telefone = this.loginForm.get('telefone')?.value;
     const senha = this.loginForm.get('senha')?.value;
     this.apiService.postAuth(telefone, senha).subscribe((res) => {
-      console.log(res);
       if (res.access_token) {
         localStorage.setItem('accessToken', res.access_token);
         this.decoded = jwt_decode(res.access_token);

@@ -58,4 +58,53 @@ export class ApiService {
     return this.http.get(`${this.apiRoot}agendamentos/barbeiro/data`, { params: params });
   }
 
+  postServico(body: any, token: string): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('token', token);
+    return this.http.post(`${this.apiRoot}servico`, body, { params: params });
+  }
+
+  deleteServico(guidServico: string, token: string): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('token', token);
+    return this.http.delete(`${this.apiRoot}servico/${guidServico}`, { params: params });
+  }
+
+  deleteAgendamento(guidAgendamento: string, token: string): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('token', token);
+    return this.http.delete(`${this.apiRoot}agendamentos/${guidAgendamento}`, { params: params });
+  }
+
+  getBarbeiroPorGuid(guidBarbeiro: string, token: string): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('token', token);
+    return this.http.get(`${this.apiRoot}barbeiros/${guidBarbeiro}`, { params: params });
+  }
+
+  putBarbeiroPorGuid(guidBarbeiro: string, token: string, body: any): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('token', token);
+    return this.http.put(`${this.apiRoot}barbeiros/${guidBarbeiro}`, body, { params: params });
+  }
+
+  getDominios(tpDominio: string, token: string): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('token', token);
+    params = params.append('tpDominio', tpDominio);
+    return this.http.get(`${this.apiRoot}dominios`, { params: params });
+  }
+
+  postPeriodo(token: string, body: any): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('token', token);
+    return this.http.post(`${this.apiRoot}periodo`, body, { params: params });
+  }
+
+  deletePeriodo(guidPeriodo: string, token: string): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('token', token);
+    return this.http.delete(`${this.apiRoot}periodo/${guidPeriodo}`, { params: params });
+  }
+
 }
