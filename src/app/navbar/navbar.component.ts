@@ -19,4 +19,17 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  closeNavbar(): void {
+    const navbarToggler: any = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+
+    if (navbarCollapse && navbarToggler) {
+      // Verifica se o menu está expandido
+      if (navbarCollapse.classList.contains('show')) {
+        // Simula um clique no botão de toggle para fechar o menu
+        navbarToggler.click();
+      }
+    }
+  }
+
 }
