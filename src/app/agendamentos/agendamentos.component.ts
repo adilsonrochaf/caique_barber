@@ -3,6 +3,8 @@ import { ApiService } from 'src/services/api.service';
 import { format } from 'date-fns';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDeleteComponent } from '../modal-delete/modal-delete.component';
 
 @Component({
   selector: 'app-agendamentos',
@@ -18,7 +20,8 @@ export class AgendamentosComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private modalService: NgbModal
   ) {
     this.filterForm = this.fb.group({
       dataSugerida: this.fb.control('', [Validators.required])
@@ -49,15 +52,25 @@ export class AgendamentosComponent implements OnInit {
   }
 
   deletarAgendamento(guidAgendamento: string): void {
-    this.spinner.show();
-    this.apiService.deleteAgendamento(guidAgendamento, this.token).subscribe(() => {
-      const hoje = new Date();
-      const dataFormatada = format(hoje, 'yyyy-MM-dd');
-      this.filterForm.get('dataSugerida')?.setValue(dataFormatada);
-      this.buscaAgendamentosBarbeiro(dataFormatada);
-    }, (error: any) => {
-      console.log(error);
-      this.spinner.hide();
+    const modalRef = this.modalService.open(ModalDeleteComponent);
+    modalRef.componentInstance.result.subscribe({
+      next: (response: any) => {
+        if (response) {
+          this.spinner.show();
+          this.apiService.deleteAgendamento(guidAgendamento, this.token).subscribe({
+            next: () => {
+              const hoje = new Date();
+              const dataFormatada = format(hoje, 'yyyy-MM-dd');
+              this.filterForm.get('dataSugerida')?.setValue(dataFormatada);
+              this.buscaAgendamentosBarbeiro(dataFormatada);
+            },
+            error: (erro) => {
+              console.log(erro);
+              this.spinner.hide();
+            }
+          });
+        }
+      }
     });
   }
 

@@ -17,6 +17,8 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDeleteComponent } from './modal-delete/modal-delete.component';
 
 
 export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
@@ -31,7 +33,8 @@ export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
     NavbarComponent,
     BarbeirosComponent,
     ServicosComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    ModalDeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
     ReactiveFormsModule,
     HttpClientModule,
     NgxSpinnerModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    NgbModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

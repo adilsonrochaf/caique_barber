@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/services/api.service';
+import { ModalDeleteComponent } from '../modal-delete/modal-delete.component';
 // import { ApiService } from 'src/services/api.service';
 
 @Component({
@@ -18,7 +20,8 @@ export class ServicosComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private modalService: NgbModal
   ) {
     this.servicosForm = this.fb.group({
       nome: this.fb.control('', [Validators.required]),
@@ -61,12 +64,22 @@ export class ServicosComponent implements OnInit {
   }
 
   deletarServico(guidServico: string): void {
-    this.spinner.show();
-    this.apiService.deleteServico(guidServico, this.token).subscribe(() => {
-      this.buscaservicos();
-    }, (error: any) => {
-      console.log(error);
-      this.spinner.hide();
+    const modalRef = this.modalService.open(ModalDeleteComponent);
+    modalRef.componentInstance.result.subscribe({
+      next: (response: any) => {
+        if (response) {
+          this.spinner.show();
+          this.apiService.deleteServico(guidServico, this.token).subscribe({
+            next: () => {
+              this.buscaservicos();
+            },
+            error: (erro) => {
+              console.log(erro);
+              this.spinner.hide();
+            }
+          });
+        }
+      }
     });
   }
 

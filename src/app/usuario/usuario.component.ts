@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/services/api.service';
+import { ModalDeleteComponent } from '../modal-delete/modal-delete.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-usuario',
@@ -21,7 +23,8 @@ export class UsuarioComponent implements OnInit{
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private modalService: NgbModal
   ) {
     this.barbeirosForm = this.fb.group({
       nome: this.fb.control('', [Validators.required]),
@@ -126,10 +129,22 @@ export class UsuarioComponent implements OnInit{
   }
 
   deletarPeriodo(guidPeriodo: string): void {
-    this.spinner.show();
-    this.apiService.deletePeriodo(guidPeriodo, this.token).subscribe(() => {
-      this.buscaBarbeiro();
+    const modalRef = this.modalService.open(ModalDeleteComponent);
+    modalRef.componentInstance.result.subscribe({
+      next: (response: any) => {
+        if (response) {
+          this.spinner.show();
+          this.apiService.deletePeriodo(guidPeriodo, this.token).subscribe({
+            next: () => {
+              this.buscaBarbeiro();
+            },
+            error: (erro) => {
+              console.log(erro);
+              this.spinner.hide();
+            }
+          });
+        }
+      }
     });
   }
-
 }
