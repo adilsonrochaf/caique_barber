@@ -68,6 +68,22 @@ export class SiteComponent implements OnInit {
     this.buscaAgendamentoCliente();
   }
 
+  openLinkInsta() {
+    window.open('https://www.instagram.com/caiiquebarber_?igsh=MWo5bjgyanNrb2VuMg==', '_blank');
+  }
+
+  openLinkFace() {
+    window.open('https://www.facebook.com/share/FN6pE1x5sf1MMfCM/?mibextid=qi2Omg', '_blank');
+  }
+
+  openLinkWhats() {
+    window.open('https://wa.me/5518997924275', '_blank');
+  }
+
+  openLinkLocalizacao() {
+    window.open('https://maps.app.goo.gl/gt72r4XfLrjeRTHM8', '_blank');
+  }
+
   buscaAgendamentoCliente(): void {
     this.nomeCliente = localStorage.getItem('nomeCliente');
     this.telefoneCliente = localStorage.getItem('telefoneCliente') ? localStorage.getItem('telefoneCliente') : this.telefoneValue;

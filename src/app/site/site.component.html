@@ -75,7 +75,7 @@
                 class="form-control input"
                 placeholder="Telefone"
                 required
-                mask="(00) 0 0000-0000"
+                mask="(00) 00000-0000"
                 [(ngModel)]="telefoneValue"
               />
               </div>
@@ -140,7 +140,7 @@
                           placeholder="Telefone"
                           formControlName="telefone"
                           required
-                          mask="(00) 0 0000-0000"
+                          mask="(00) 00000-0000"
                         />
                       </div>
                     </div>
@@ -483,8 +483,8 @@
               <p class="team-text">Barbeiro</p>
               <div class="social">
                 <div class="full-width">
-                  <a href="#"><i class="ti-facebook"></i></a>
-                  <a href="#"><i class="ti-instagram"></i></a>
+                  <a (click)="openLinkFace()"><i class="ti-facebook"></i></a>
+                  <a (click)="openLinkInsta()"><i class="ti-instagram"></i></a>
                 </div>
               </div>
             </div>
@@ -541,11 +541,11 @@
         <div class="col-md-3">
           <div class="footer-column footer-contact">
             <h3 class="footer-title">Contatos</h3>
-            <p class="footer-contact-text">
+            <p class="footer-contact-text" (click)="openLinkLocalizacao()">
               Rua Silvares, 486, Silvares, Birigui SP, 16201-013 <br />Brasil
             </p>
             <div class="footer-contact-info">
-              <p class="footer-contact-phone">(18)99792-4275</p>
+              <p class="footer-contact-phone" (click)="openLinkWhats()">(18)99792-4275</p>
             </div>
           </div>
         </div>
@@ -595,8 +595,8 @@
           <div class="footer-column footer-explore clearfix">
             <h3 class="footer-title">Redes Sociais</h3>
             <div class="footer-about-social-list">
-              <a href="#"><i class="ti-instagram"></i></a>
-              <a href="#"><i class="ti-facebook"></i></a>
+              <a (click)="openLinkFace()"><i class="ti-facebook"></i></a>
+              <a (click)="openLinkInsta()"><i class="ti-instagram"></i></a>
             </div>
           </div>
         </div>
