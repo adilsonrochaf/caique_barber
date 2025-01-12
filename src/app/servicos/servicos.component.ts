@@ -15,7 +15,6 @@ export class ServicosComponent implements OnInit {
 
   servicos: any[] = [];
   servicosForm: FormGroup;
-  token!: string;
 
   constructor(
     private fb: FormBuilder,
@@ -32,7 +31,6 @@ export class ServicosComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.token = localStorage.getItem('accessToken') || '';
     this.buscaservicos();
   }
 
@@ -53,7 +51,7 @@ export class ServicosComponent implements OnInit {
       valor: Number(this.servicosForm.get('valor')?.value),
       tempo: this.servicosForm.get('tempo')?.value,
     };
-    this.apiService.postServico(body, this.token).subscribe(() => {
+    this.apiService.postServico(body).subscribe(() => {
       this.buscaservicos();
       this.servicosForm.reset();
     }, (error) => {
@@ -69,7 +67,7 @@ export class ServicosComponent implements OnInit {
       next: (response: any) => {
         if (response) {
           this.spinner.show();
-          this.apiService.deleteServico(guidServico, this.token).subscribe({
+          this.apiService.deleteServico(guidServico).subscribe({
             next: () => {
               this.buscaservicos();
             },

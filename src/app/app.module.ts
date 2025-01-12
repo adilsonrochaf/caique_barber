@@ -6,7 +6,7 @@ import { SiteComponent } from './site/site.component';
 import { AppRoutingModule } from './app.routing';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { AgendamentosComponent } from './agendamentos/agendamentos.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -19,6 +19,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDeleteComponent } from './modal-delete/modal-delete.component';
+import { AuthInterceptor } from './auth.interceptor';
+import { CookieBannerComponent } from './components/cookie-banner/cookie-banner.component';
+import { PoliticaDePrivacidadeComponent } from './politica-de-privacidade/politica-de-privacidade.component';
 
 
 export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
@@ -34,7 +37,9 @@ export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
     BarbeirosComponent,
     ServicosComponent,
     UsuarioComponent,
-    ModalDeleteComponent
+    ModalDeleteComponent,
+    CookieBannerComponent,
+    PoliticaDePrivacidadeComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,13 @@ export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
     NgbModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

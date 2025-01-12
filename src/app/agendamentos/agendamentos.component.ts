@@ -15,7 +15,6 @@ export class AgendamentosComponent implements OnInit {
 
   agendamentos: any[] = [];
   filterForm: FormGroup;
-  token!: string;
 
   constructor(
     private fb: FormBuilder,
@@ -30,7 +29,6 @@ export class AgendamentosComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.token = localStorage.getItem('accessToken') || '';
     const hoje = new Date();
     const dataFormatada = format(hoje, 'yyyy-MM-dd');
     this.filterForm.get('dataSugerida')?.setValue(dataFormatada);
@@ -42,9 +40,8 @@ export class AgendamentosComponent implements OnInit {
       dataSugerida = this.filterForm.get('dataSugerida')?.value;
     }
     const idBarbeiro = localStorage.getItem('idBarbeiro');
-    const token = localStorage.getItem('accessToken');
-    if (token && idBarbeiro && dataSugerida) {
-      this.apiService.getAgendamentosBarbeiro(token, idBarbeiro, dataSugerida).subscribe((agendamentos) => {
+    if (idBarbeiro && dataSugerida) {
+      this.apiService.getAgendamentosBarbeiro(idBarbeiro, dataSugerida).subscribe((agendamentos) => {
         this.agendamentos = agendamentos;
         this.spinner.hide();
       })
@@ -57,7 +54,7 @@ export class AgendamentosComponent implements OnInit {
       next: (response: any) => {
         if (response) {
           this.spinner.show();
-          this.apiService.deleteAgendamento(guidAgendamento, this.token).subscribe({
+          this.apiService.deleteAgendamento(guidAgendamento).subscribe({
             next: () => {
               const hoje = new Date();
               const dataFormatada = format(hoje, 'yyyy-MM-dd');

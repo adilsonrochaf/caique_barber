@@ -50,61 +50,49 @@ export class ApiService {
     return this.http.post(`${this.apiRoot}agendamentos`, body);
   }
 
-  getAgendamentosBarbeiro(token: string, barbeiro_id: string, data_sugerida: string): Observable<any>{
+  getAgendamentosBarbeiro(barbeiro_id: string, data_sugerida: string): Observable<any>{
     let params = new HttpParams();
-    params = params.append('token', token);
     params = params.append('barbeiro_id', barbeiro_id);
     params = params.append('data_sugerida', data_sugerida);
     return this.http.get(`${this.apiRoot}agendamentos/barbeiro/data`, { params: params });
   }
 
-  postServico(body: any, token: string): Observable<any>{
-    let params = new HttpParams();
-    params = params.append('token', token);
-    return this.http.post(`${this.apiRoot}servico`, body, { params: params });
+  postServico(body: any): Observable<any>{
+    return this.http.post(`${this.apiRoot}servico`, body);
   }
 
-  deleteServico(guidServico: string, token: string): Observable<any>{
-    let params = new HttpParams();
-    params = params.append('token', token);
-    return this.http.delete(`${this.apiRoot}servico/${guidServico}`, { params: params });
+  deleteServico(guidServico: string): Observable<any>{
+    return this.http.delete(`${this.apiRoot}servico/${guidServico}`);
   }
 
-  deleteAgendamento(guidAgendamento: string, token: string): Observable<any>{
-    let params = new HttpParams();
-    params = params.append('token', token);
-    return this.http.delete(`${this.apiRoot}agendamentos/${guidAgendamento}`, { params: params });
+  deleteAgendamento(guidAgendamento: string): Observable<any>{
+    return this.http.delete(`${this.apiRoot}agendamentos/${guidAgendamento}`);
   }
 
-  getBarbeiroPorGuid(guidBarbeiro: string, token: string): Observable<any>{
-    let params = new HttpParams();
-    params = params.append('token', token);
-    return this.http.get(`${this.apiRoot}barbeiros/${guidBarbeiro}`, { params: params });
+  postBarbeiro(body: any): Observable<any>{
+    return this.http.post(`${this.apiRoot}barbeiros`, body);
   }
 
-  putBarbeiroPorGuid(guidBarbeiro: string, token: string, body: any): Observable<any>{
-    let params = new HttpParams();
-    params = params.append('token', token);
-    return this.http.put(`${this.apiRoot}barbeiros/${guidBarbeiro}`, body, { params: params });
+  getBarbeiroPorGuid(guidBarbeiro: string): Observable<any>{
+    return this.http.get(`${this.apiRoot}barbeiros/${guidBarbeiro}`);
   }
 
-  getDominios(tpDominio: string, token: string): Observable<any>{
+  putBarbeiroPorGuid(guidBarbeiro: string, body: any): Observable<any>{
+    return this.http.put(`${this.apiRoot}barbeiros/${guidBarbeiro}`, body);
+  }
+
+  getDominios(tpDominio: string): Observable<any>{
     let params = new HttpParams();
-    params = params.append('token', token);
     params = params.append('tpDominio', tpDominio);
-    return this.http.get(`${this.apiRoot}dominios`, { params: params });
+    return this.http.get(`${this.apiRoot}dominios`);
   }
 
-  postPeriodo(token: string, body: any): Observable<any>{
-    let params = new HttpParams();
-    params = params.append('token', token);
-    return this.http.post(`${this.apiRoot}periodo`, body, { params: params });
+  postPeriodo(body: any): Observable<any>{
+    return this.http.post(`${this.apiRoot}periodo`, body);
   }
 
-  deletePeriodo(guidPeriodo: string, token: string): Observable<any>{
-    let params = new HttpParams();
-    params = params.append('token', token);
-    return this.http.delete(`${this.apiRoot}periodo/${guidPeriodo}`, { params: params });
+  deletePeriodo(guidPeriodo: string): Observable<any>{
+    return this.http.delete(`${this.apiRoot}periodo/${guidPeriodo}`);
   }
 
 }

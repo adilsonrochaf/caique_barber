@@ -9,11 +9,13 @@ import { LayoutComponent } from './layout/layout.component';
 import { BarbeirosComponent } from './barbeiros/barbeiros.component';
 import { ServicosComponent } from './servicos/servicos.component';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { PoliticaDePrivacidadeComponent } from './politica-de-privacidade/politica-de-privacidade.component';
 
 
 export const routes: Routes =[
-  { path: '', component: SiteComponent },
+  { path: '', component: SiteComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'politica-de-privacidade', component: PoliticaDePrivacidadeComponent },
   {
     path: 'sistema',
     component: LayoutComponent,

@@ -1,0 +1,78 @@
+/* src/app/components/cookie-banner/cookie-banner.component.css */
+
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #4b4641;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
+  }
+  
+  .banner-content {
+    color: #ffffff;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .banner-content p {
+    color: #ffffff;
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .banner-content a {
+    color: #3498db;
+    text-decoration: underline;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .btn.accept {
+    background-color: #27ae5f65;
+    color: #fff;
+  }
+  
+  .btn.reject {
+    background-color: #c03a2b60;
+    color: #fff;
+  }
+  
+  @media (min-width: 600px) {
+    .banner-content {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .banner-content p {
+      text-align: left;
+      margin: 0;
+      flex: 1;
+      padding-right: 20px;
+    }
+  
+    .buttons {
+      margin-top: 0;
+    }
+  }
+  

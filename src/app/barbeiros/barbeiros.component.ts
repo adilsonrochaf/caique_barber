@@ -14,7 +14,6 @@ export class BarbeirosComponent implements OnInit{
 
   barbeiros: any[] = [];
   barbeirosForm: FormGroup;
-  token!: string;
 
   constructor(
     private fb: FormBuilder,
@@ -31,7 +30,6 @@ export class BarbeirosComponent implements OnInit{
 
   ngOnInit(): void {
     this.spinner.show();
-    this.token = localStorage.getItem('accessToken') || '';
     this.buscaBarbeiros();
   }
 
@@ -49,10 +47,10 @@ export class BarbeirosComponent implements OnInit{
     this.spinner.show();
     const body = {
       nome: this.barbeirosForm.get('nome')?.value,
-      valor: Number(this.barbeirosForm.get('valor')?.value),
-      tempo: this.barbeirosForm.get('tempo')?.value,
+      telefone: Number(this.barbeirosForm.get('telefone')?.value),
+      senha: this.barbeirosForm.get('senha')?.value,
     };
-    this.apiService.postServico(body, this.token).subscribe(() => {
+    this.apiService.postBarbeiro(body).subscribe(() => {
       this.buscaBarbeiros();
       this.barbeirosForm.reset();
     }, (error) => {
@@ -68,7 +66,7 @@ export class BarbeirosComponent implements OnInit{
       next: (response: any) => {
         if (response) {
           this.spinner.show();
-          this.apiService.deleteServico(guidServico, this.token).subscribe({
+          this.apiService.deleteServico(guidServico).subscribe({
             next: () => {
               this.buscaBarbeiros();
             },

@@ -195,6 +195,26 @@
                       </div>
                     </div>
                   </div>
+                  <div class="col-md-12" style="padding-bottom: 10px;">
+                    <label class="checkbox-label">
+                      <input type="checkbox" formControlName="notificacao" />
+                        Aceito receber notificações por e-mail?
+                    </label>
+                  </div>
+                  <div class="col-md-12" *ngIf="showEmail">
+                    <div class="input1_wrapper">
+                      <label>E-mail para notificação do agendamento</label>
+                      <div class="input2_inner">
+                        <input
+                          type="text"
+                          class="form-control input"
+                          placeholder="E-mail para notificação do agendamento"
+                          formControlName="email"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
 
                   <div class="col-md-12">
                     <button type="submit" [ngClass]="{'disabled-button': !agendamentoForm.valid}" class="btn-form1-submit mt-15" (click)="onSubmit()">

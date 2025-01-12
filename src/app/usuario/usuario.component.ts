@@ -14,7 +14,6 @@ export class UsuarioComponent implements OnInit{
 
   barbeirosForm: FormGroup;
   periodosForm: FormGroup;
-  token!: string;
   guidBarbeiro!: string;
   idBarbeiro!: number;
   periodos: any[] = [];
@@ -40,7 +39,6 @@ export class UsuarioComponent implements OnInit{
 
   ngOnInit(): void {
     this.spinner.show();
-    this.token = localStorage.getItem('accessToken') || '';
     this.guidBarbeiro = localStorage.getItem('guidBarbeiro') || '';
     this.idBarbeiro = Number(localStorage.getItem('idBarbeiro'));
     this.buscaBarbeiro();
@@ -48,7 +46,7 @@ export class UsuarioComponent implements OnInit{
 
   buscaDiasDaSemana(): void {
     this.diasSemana = [];
-    this.apiService.getDominios('dia_semana', this.token).subscribe((res) => {
+    this.apiService.getDominios('dia_semana').subscribe((res) => {
       const diaSemanaIds = this.periodos.map(item => item.dia_semana_id);
       res.forEach((element: any) => {
         const apareceDuasVezes: boolean = this.verificaDiaDuplo(diaSemanaIds, element.id_dominio);
@@ -74,7 +72,7 @@ export class UsuarioComponent implements OnInit{
 }
 
   buscaBarbeiro(): void {
-    this.apiService.getBarbeiroPorGuid(this.guidBarbeiro, this.token).subscribe((res) => {
+    this.apiService.getBarbeiroPorGuid(this.guidBarbeiro).subscribe((res) => {
       this.barbeirosForm.get('nome')?.setValue(res.nome);
       this.barbeirosForm.get('telefone')?.setValue(res.telefone);
       this.barbeirosForm.get('senha')?.setValue(null);
@@ -94,7 +92,7 @@ export class UsuarioComponent implements OnInit{
       telefone: this.barbeirosForm.get('telefone')?.value,
       senha: this.barbeirosForm.get('senha')?.value,
     }
-    this.apiService.putBarbeiroPorGuid(this.guidBarbeiro, this.token, body).subscribe((res) => {
+    this.apiService.putBarbeiroPorGuid(this.guidBarbeiro, body).subscribe((res) => {
       this.barbeirosForm.get('nome')?.setValue(res.nome);
       this.barbeirosForm.get('telefone')?.setValue(res.telefone);
       this.barbeirosForm.get('senha')?.setValue(null);
@@ -111,7 +109,7 @@ export class UsuarioComponent implements OnInit{
       hora_fim: this.adicionarDoisPontosAosDigitos(this.periodosForm.get('hora_fim')?.value),
       dia_semana_id: Number(this.periodosForm.get('dia_semana')?.value),
     }
-    this.apiService.postPeriodo(this.token, body).subscribe(() => {
+    this.apiService.postPeriodo(body).subscribe(() => {
       this.buscaBarbeiro();
       this.periodosForm.reset();
       this.periodosForm.get('dia_semana')?.setValue('');
@@ -134,7 +132,7 @@ export class UsuarioComponent implements OnInit{
       next: (response: any) => {
         if (response) {
           this.spinner.show();
-          this.apiService.deletePeriodo(guidPeriodo, this.token).subscribe({
+          this.apiService.deletePeriodo(guidPeriodo).subscribe({
             next: () => {
               this.buscaBarbeiro();
             },

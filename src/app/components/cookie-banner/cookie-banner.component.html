@@ -1,0 +1,15 @@
+<!-- src/app/components/cookie-banner/cookie-banner.component.html -->
+
+<div *ngIf="!isConsentGiven" class="cookie-banner">
+    <div class="banner-content">
+      <p>
+        Utilizamos cookies para melhorar sua experiência no nosso site. Ao continuar, você concorda com nossa 
+        <a routerLink="politica-de-privacidade">Política de Privacidade</a>.
+      </p>
+      <div class="buttons">
+        <button (click)="acceptCookies()" class="btn accept">Aceitar</button>
+        <button (click)="rejectCookies()" class="btn reject">Recusar</button>
+      </div>
+    </div>
+ </div>
+  

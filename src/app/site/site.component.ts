@@ -23,6 +23,7 @@ export class SiteComponent implements OnInit {
   loadingHours: boolean = false;
   telefoneValue: string = '';
   mostrarAgendamentos: boolean = false;
+  showEmail: boolean = true;
 
   constructor(
     private fb: FormBuilder,
@@ -34,7 +35,9 @@ export class SiteComponent implements OnInit {
       barbeiro: this.fb.control('', [Validators.required]),
       servico: this.fb.control('', [Validators.required]),
       data: this.fb.control('', [Validators.required]),
-      horario: this.fb.control('', [Validators.required])
+      horario: this.fb.control('', [Validators.required]),
+      email: this.fb.control(''),
+      notificacao: this.fb.control(true, [Validators.required])
     });
   }
 
@@ -66,6 +69,17 @@ export class SiteComponent implements OnInit {
       }
     });
     this.buscaAgendamentoCliente();
+
+    this.agendamentoForm.get('notificacao')?.valueChanges.subscribe((res: boolean) => {
+      this.showEmail = res;
+      const emailControl = this.agendamentoForm.get('email');
+      if (res) {
+        emailControl?.setValidators([Validators.required]);
+      } else {
+        emailControl?.setValidators(null);
+      }
+      emailControl?.updateValueAndValidity();
+    });
   }
 
   openLinkInsta() {
@@ -138,12 +152,14 @@ export class SiteComponent implements OnInit {
   onSubmit(): void {
     localStorage.setItem('nomeCliente', this.agendamentoForm.get('nome')?.value);
     localStorage.setItem('telefoneCliente', this.agendamentoForm.get('telefone')?.value);
+    localStorage.setItem('emailCliente', this.agendamentoForm.get('email')?.value);
     const bodyAgendamento: any = {
       servico_id: Number(this.agendamentoForm.get('servico')?.value),
       barbeiro_id: Number(this.agendamentoForm.get('barbeiro')?.value),
       data_hora: `${this.agendamentoForm.get('data')?.value} ${this.agendamentoForm.get('horario')?.value}`,
       nome_cliente: this.agendamentoForm.get('nome')?.value,
       telefone_cliente: this.agendamentoForm.get('telefone')?.value,
+      email_cliente: this.agendamentoForm.get('email')?.value,
     }
     this.apiService.postAgendamento(bodyAgendamento).subscribe(() => {
       this.agendamentoForm.reset();
@@ -151,6 +167,7 @@ export class SiteComponent implements OnInit {
       this.agendamentoForm.get('servico')?.setValue('');
       this.agendamentoForm.get('data')?.setValue('');
       this.agendamentoForm.get('horario')?.setValue('');
+      this.agendamentoForm.get('email')?.setValue('');
       this.buscaAgendamentoCliente();
     });
   }
